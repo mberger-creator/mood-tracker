@@ -496,7 +496,7 @@ function trendVal(v){
 }
 async function loadFromSheet(){
   try{
-    const resp = await fetch('https://docs.google.com/spreadsheets/d/1SIR5Oi9cRJP7_q8O2z4bh_WH75kBmlKVXeOgmasete0/gviz/tq?tqx=out:csv&sheet=votes');
+    const resp = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQE2OakJypdA0c23I_bQLrxhfPWJKkjSwioST0D-75FCsgysOHFJuQMVNEjm6nn9dbroSm8P2MRYOdV/pub?gid=0&single=true&output=csv');
     if(!resp.ok) return;
     const text = await resp.text();
     const lines = text.trim().split('\n').slice(1); // skip header
