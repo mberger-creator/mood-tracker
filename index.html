@@ -281,11 +281,9 @@ footer img{height:18px;opacity:.35}
       <p class="card-lbl">Alertes &amp; signaux</p>
       <div id="alerts"></div>
     </div>
-    <div style="text-align:right;margin-top:8px">
-      <button onclick="resetData()" style="background:none;border:1px solid #ddd;color:#888;font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;" onmouseover="this.style.borderColor='#c62828';this.style.color='#c62828'" onmouseout="this.style.borderColor='#ddd';this.style.color='#888'">🗑 Remettre les statistiques à zéro</button>
-    </div>
-    <div style="text-align:right;margin-top:4px">
-      <button class="change-pin-link" onclick="go('changepin')">Modifier le code PIN du dashboard &rarr;</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+      <button onclick="resetData()" style="background:none;border:1.5px solid #e2e2de;color:#888;font-size:12px;padding:7px 14px;border-radius:6px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='#c62828';this.style.color='#c62828'" onmouseout="this.style.borderColor='#e2e2de';this.style.color='#888'">&#128465; Remettre les statistiques &agrave; z&eacute;ro</button>
+      <button class="change-pin-link" onclick="go('changepin')">Modifier le code PIN &rarr;</button>
     </div>
   </div>
 
@@ -570,12 +568,11 @@ function renderAlerts(v){
 }
 
 function resetData(){
-  if(!confirm('Remettre toutes les statistiques à zéro ? Cette action est irréversible.')) return;
+  if(!confirm('Remettre toutes les statistiques \u00e0 z\u00e9ro ?\nCette action est irr\u00e9versible.')) return;
   localStorage.removeItem('cw3_votes');
   renderDash();
-  alert('Statistiques remises à zéro. Pensez à vider également votre Google Sheet.');
+  alert('\u2705 Statistiques remises \u00e0 z\u00e9ro !\n\nPensez aussi \u00e0 vider votre Google Sheet.');
 }
-
 
 init();
 </script>
