@@ -562,10 +562,6 @@ function renderAlerts(v){
   el.innerHTML=list.map(x=>'<p class="alert-item">'+x+'</p>').join('');
 }
 
-/* ── DEMO DATA ── */
-  }
-  localStorage.setItem('cw3_votes',JSON.stringify(demo));
-}
 
 function resetData(){
   if(!confirm('Remettre toutes les statistiques \u00e0 z\u00e9ro ?\nCette action est irr\u00e9versible.')) return;
