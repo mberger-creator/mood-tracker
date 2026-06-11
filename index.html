@@ -206,7 +206,7 @@ footer img{height:18px;opacity:.35}
 <div id="app">
 
 <!-- Écran de veille kiosque -->
-<div id="kiosk-overlay" class="kiosk-overlay hidden" onclick="kioskWake()">
+<div id="kiosk-overlay" class="kiosk-overlay hidden" onclick="kioskWake()" style="position:fixed;inset:0;top:0;left:0;right:0;bottom:0;background:#111111;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;cursor:pointer;">
   <div class="kiosk-faces">
     <span>😄</span><span>🙂</span><span>😐</span><span>😕</span><span>😞</span>
   </div>
@@ -214,10 +214,10 @@ footer img{height:18px;opacity:.35}
   <p class="kiosk-sub">Appuyez n'importe où pour voter</p>
   <p class="kiosk-arrow">↓ touchez l'écran ↓</p>
 </div>
-<div id="kiosk-bar" class="kiosk-bar hidden"></div>
+<div id="kiosk-bar" style="position:fixed;bottom:0;left:0;right:0;height:4px;background:#f9db03;transform-origin:left;z-index:10000;display:none;"></div>
 
 <!-- Overlay PIN pour accès dashboard en mode kiosque -->
-<div id="kiosk-pin-overlay" class="kiosk-pin-overlay hidden">
+<div id="kiosk-pin-overlay" class="kiosk-pin-overlay hidden" style="position:fixed;inset:0;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:10001;">
   <div class="kiosk-pin-box">
     <h3>Accès Dashboard</h3>
     <p>Entrez le code PIN manager</p>
@@ -692,20 +692,21 @@ function kioskResetTimer(){
 
 function kioskShowOverlay(){
   if(!kioskActive) return;
-  document.getElementById('kiosk-overlay').classList.remove('hidden');
+  var ov = document.getElementById('kiosk-overlay');
+  ov.style.display = 'flex';
   // Barre de progression (repart toutes les 15s pour garder l'attention)
   kioskStartBar();
 }
 
 function kioskHideOverlay(){
-  document.getElementById('kiosk-overlay').classList.add('hidden');
-  document.getElementById('kiosk-bar').classList.add('hidden');
+  document.getElementById('kiosk-overlay').style.display = 'none';
+  document.getElementById('kiosk-bar').style.display = 'none';
   clearTimeout(kioskBarAnim);
 }
 
 function kioskStartBar(){
   const bar = document.getElementById('kiosk-bar');
-  bar.classList.remove('hidden');
+  bar.style.display = 'block';
   bar.style.transition = 'none';
   bar.style.transform = 'scaleX(1)';
   setTimeout(()=>{
@@ -738,7 +739,8 @@ function tryDash(){
 }
 
 function kioskShowPinOverlay(){
-  document.getElementById('kiosk-pin-overlay').classList.remove('hidden');
+  var po = document.getElementById('kiosk-pin-overlay');
+  po.style.display = 'flex';
   document.getElementById('kiosk-pin-input').value = '';
   document.getElementById('kiosk-pin-err').textContent = '';
   setTimeout(()=>document.getElementById('kiosk-pin-input').focus(), 100);
@@ -751,7 +753,7 @@ async function kioskCheckPin(){
   const stored = await getStoredHash();
   if(h === stored){
     authOk = true;
-    document.getElementById('kiosk-pin-overlay').classList.add('hidden');
+    document.getElementById('kiosk-pin-overlay').style.display = 'none';
     document.getElementById('logout-btn').style.display = '';
     go('dash');
   } else {
@@ -761,7 +763,7 @@ async function kioskCheckPin(){
 }
 
 function kioskPinCancel(){
-  document.getElementById('kiosk-pin-overlay').classList.add('hidden');
+  document.getElementById('kiosk-pin-overlay').style.display = 'none';
 }
 
 // Retour auto à l'écran de vote après remerciement
