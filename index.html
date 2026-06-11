@@ -281,6 +281,9 @@ footer img{height:18px;opacity:.35}
       <p class="card-lbl">Alertes &amp; signaux</p>
       <div id="alerts"></div>
     </div>
+    <div style="text-align:right;margin-top:8px">
+      <button onclick="resetData()" style="background:none;border:1px solid #ddd;color:#888;font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;" onmouseover="this.style.borderColor='#c62828';this.style.color='#c62828'" onmouseout="this.style.borderColor='#ddd';this.style.color='#888'">🗑 Remettre les statistiques à zéro</button>
+    </div>
     <div style="text-align:right;margin-top:4px">
       <button class="change-pin-link" onclick="go('changepin')">Modifier le code PIN du dashboard &rarr;</button>
     </div>
@@ -397,7 +400,6 @@ function init(){
     sr.appendChild(b);
   });
   buildFilters();
-  injectDemo();
 }
 
 function chk(){document.getElementById('submit-btn').classList.toggle('on',!!(sTeam&&sScore));}
@@ -563,20 +565,17 @@ function renderAlerts(v){
 }
 
 /* ── DEMO DATA ── */
-function injectDemo(){
-  if(votes().length)return;
-  const now=Date.now(),demo=[];
-  for(let d=0;d<30;d++){
-    const base=now-d*864e5,n=Math.floor(Math.random()*5)+3;
-    for(let i=0;i<n;i++){
-      const pool=[5,5,4,4,4,4,3,3,3,2,4,5,4,3,4];
-      demo.push({ts:new Date(base-Math.random()*8*36e5).toISOString(),
-        team:TEAMS[Math.floor(Math.random()*TEAMS.length)],
-        score:pool[Math.floor(Math.random()*pool.length)],wk:''});
-    }
   }
   localStorage.setItem('cw3_votes',JSON.stringify(demo));
 }
+
+function resetData(){
+  if(!confirm('Remettre toutes les statistiques à zéro ? Cette action est irréversible.')) return;
+  localStorage.removeItem('cw3_votes');
+  renderDash();
+  alert('Statistiques remises à zéro. Pensez à vider également votre Google Sheet.');
+}
+
 
 init();
 </script>
