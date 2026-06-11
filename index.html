@@ -152,6 +152,53 @@ footer img{height:18px;opacity:.35}
   .vote-head{padding:28px 20px 24px}
   .vote-body{padding:20px 20px 24px}
 }
+
+  /* ── KIOSQUE ── */
+  .kiosk-overlay{
+    position:fixed;inset:0;background:#111111;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    z-index:9999;cursor:pointer;
+  }
+  .kiosk-overlay.hidden{display:none!important}
+  .kiosk-bar{position:fixed;bottom:0;left:0;right:0;height:4px;background:#f9db03;transform-origin:left;z-index:10000;}
+  .kiosk-bar.hidden{display:none!important}
+  .kiosk-pulse{font-size:26px;font-weight:700;color:#fff;text-align:center;line-height:1.4;margin-top:24px;}
+  .kiosk-pulse span{color:#f9db03}
+  .kiosk-sub{font-size:14px;color:rgba(255,255,255,.45);margin-top:10px;text-align:center}
+  .kiosk-arrow{margin-top:32px;font-size:12px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase}
+  .kiosk-faces{display:flex;gap:18px;font-size:40px}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .kiosk-faces span{display:inline-block;animation:bounce 1.8s ease-in-out infinite}
+  .kiosk-faces span:nth-child(2){animation-delay:.15s}
+  .kiosk-faces span:nth-child(3){animation-delay:.30s}
+  .kiosk-faces span:nth-child(4){animation-delay:.45s}
+  .kiosk-faces span:nth-child(5){animation-delay:.60s}
+  .kiosk-pin-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.85);
+    display:flex;align-items:center;justify-content:center;z-index:10001;
+  }
+  .kiosk-pin-overlay.hidden{display:none!important}
+  .kiosk-pin-box{
+    background:#fff;border-radius:12px;padding:32px 28px;
+    width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3);
+  }
+  .kiosk-pin-box h3{font-size:17px;font-weight:700;margin-bottom:6px;color:#111}
+  .kiosk-pin-box p{font-size:13px;color:#888;margin-bottom:20px}
+  .kiosk-pin-input{
+    width:100%;padding:12px;border:1.5px solid #e2e2de;border-radius:8px;
+    font-size:22px;letter-spacing:.3em;text-align:center;font-family:monospace;
+    outline:none;margin-bottom:8px;box-sizing:border-box;
+  }
+  .kiosk-pin-input:focus{border-color:#f9db03}
+  .kiosk-pin-err{font-size:12px;color:#c0392b;min-height:18px;margin-bottom:12px}
+  .kiosk-pin-btn{
+    width:100%;padding:12px;background:#f9db03;color:#111;
+    font-size:14px;font-weight:700;border:none;border-radius:8px;cursor:pointer;
+  }
+  .kiosk-pin-cancel{
+    background:none;border:none;font-size:12px;color:#888;
+    cursor:pointer;margin-top:10px;text-decoration:underline;display:block;width:100%;
+  }
 </style>
 </head>
 <body>
