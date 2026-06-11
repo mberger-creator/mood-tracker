@@ -478,16 +478,7 @@ function init(){
 function chk(){document.getElementById('submit-btn').classList.toggle('on',!!(sTeam&&sScore));}
 
 /* ── VOTE ── */
-function doVote(){
-  if(!sTeam||!sScore)return;
-  pushVote({ts:new Date().toISOString(),team:sTeam,score:sScore,wk:wk()});
-  document.getElementById('ty-face').textContent=sFace;
-  document.getElementById('ty-team').textContent='✓ '+sTeam;
-  sTeam=null;sScore=null;
-  document.querySelectorAll('.team-btn,.sm-btn').forEach(b=>b.classList.remove('on'));
-  document.getElementById('submit-btn').classList.remove('on');
-  go('thanks');
-}
+/* doVote handled by kiosk version below */
 
 /* ── NAV ── */
 function go(s){
@@ -769,11 +760,11 @@ function kioskPinCancel(){
 // Retour auto à l'écran de vote après remerciement
 const _origDoVote = window.doVote;
 function doVote(){
-  if(!selTeam||!selScore)return;
-  pushVote({ts:new Date().toISOString(),team:selTeam,score:selScore,wk:wk()});
+  if(!sTeam||!sScore)return;
+  pushVote({ts:new Date().toISOString(),team:sTeam,score:sScore,wk:wk()});
   document.getElementById('ty-face').textContent=sFace;
-  document.getElementById('ty-team').textContent='✓ '+selTeam;
-  sTeam=null; sScore=null; selTeam=null; selScore=null;
+  document.getElementById('ty-team').textContent='✓ '+sTeam;
+  sTeam=null; sScore=null;
   document.querySelectorAll('.team-btn,.sm-btn').forEach(b=>b.classList.remove('on'));
   document.getElementById('submit-btn').classList.remove('on');
   go('thanks');
