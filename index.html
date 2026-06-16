@@ -358,6 +358,7 @@ footer img{height:18px;opacity:.35}
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:8px">
       <button onclick="resetData()" style="background:none;border:1.5px solid #e2e2de;color:#888;font-size:12px;padding:7px 14px;border-radius:6px;cursor:pointer;" onmouseover="this.style.color='#c62828';this.style.borderColor='#c62828'" onmouseout="this.style.color='#888';this.style.borderColor='#e2e2de'">&#128465; Remettre les statistiques &agrave; z&eacute;ro</button>
       <button id="kiosk-toggle-btn" onclick="toggleKiosk()" style="background:none;border:1.5px solid #e2e2de;color:#888;font-size:12px;padding:7px 14px;border-radius:6px;cursor:pointer;transition:all .15s" title="Activer le mode tablette">Mode kiosque</button>
+      <button onclick="kioskTest()" id="kiosk-test-btn" style="display:none;background:none;border:1.5px solid #f9db03;color:#f9b903;font-size:12px;padding:7px 14px;border-radius:6px;cursor:pointer;" title="Tester l'écran de veille">Tester veille</button>
       <button class="change-pin-link" onclick="go('changepin')">Modifier le code PIN &rarr;</button>
     </div>
   </div>
@@ -646,6 +647,7 @@ function toggleKiosk(){
     btn.style.background = '#f9db03';
     btn.style.borderColor = '#f9db03';
     btn.textContent = 'Mode kiosque ON';
+    document.getElementById('kiosk-test-btn').style.display = 'inline-block';
     // Empêcher navigation arrière
     history.pushState(null,'',location.href);
     window.addEventListener('popstate', kioskPreventBack);
@@ -658,6 +660,7 @@ function toggleKiosk(){
     btn.style.background = 'none';
     btn.style.borderColor = '#e2e2de';
     btn.textContent = 'Mode kiosque';
+    document.getElementById('kiosk-test-btn').style.display = 'none';
     clearTimeout(kioskTimer);
     kioskHideOverlay();
     window.removeEventListener('popstate', kioskPreventBack);
@@ -666,6 +669,11 @@ function toggleKiosk(){
     document.removeEventListener('keydown', kioskActivity);
   }
 }
+
+function kioskTest(){
+  kioskShowOverlay();
+}
+
 
 function kioskPreventBack(){
   history.pushState(null,'',location.href);
